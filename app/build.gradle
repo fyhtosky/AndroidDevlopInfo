@@ -1,0 +1,115 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        // These docs use an open ended version so that our plugin
+        // can be updated quickly in response to Android tooling updates
+
+        // We recommend changing it to the latest version from our changelog:
+        // https://docs.fabric.io/android/changelog.html#fabric-gradle-plugin
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+android {
+    signingConfigs {
+        netpower {
+            keyAlias 'key0'
+            keyPassword '123456'
+            storeFile file('../netpower.jks')
+            storePassword '123456'
+        }
+    }
+    dexOptions{
+//        声明是否预 dex 库依赖项以加快您的增量构建速度。
+//        由于此功能可能减慢您的干净构建的速度，
+//        您可能需要为持续性集成服务器停用此功能。
+        preDexLibraries true
+        //设置运行 dex-in-process 时要使用的最大线程数量
+        maxProcessCount 8
+        //设置 DEX 编译器的最大堆大小
+        //javaMaxHeapSize "2048m"
+    }
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
+    defaultConfig {
+        applicationId "com.example.fanyuanhua.netpower"
+        minSdkVersion 15
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        debug {
+            debuggable true
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.netpower
+        }
+        release {
+            minifyEnabled false
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.netpower
+        }
+
+    }
+    //多渠道命令打包所有平台的
+    productFlavors {
+        googlePlay {}
+        tencent {}
+        qihu360 {}
+        baidu {}
+        huawei {}
+        xiaomi {}
+        oppo {}
+        vivo {}
+        samsung {}
+        meizu {}
+
+
+    }
+    //自定义打包时apk名称
+    android.applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                //这里修改apk文件名
+                //release
+                def fileName = "netpower_${variant.productFlavors[0].name}_${defaultConfig.versionName}.apk"
+                output.outputFile = new File(outputFile.parent, fileName)
+            }
+        }
+    }
+    productFlavors.all {
+        flavor -> flavor.manifestPlaceholders = [
+                UMENG_CHANNEL_VALUE: name,
+                APPFLYER_DEV_KEY   : "DbiPJy5Z3rBxwa2pJPGUgh", //修改为当前应用的AppsFlyer开发ID
+                APPFLYER_CHANNEL   : name,]
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:28.+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+    compile 'com.orhanobut:logger:2.1.1'
+    compile 'com.jakewharton:butterknife:8.5.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    compile('com.crashlytics.sdk.android:crashlytics:2.9.7@aar') {
+        transitive = true;
+    }
+}
