@@ -1,24 +1,8 @@
-buildscript {
-    repositories {
-        maven { url 'https://maven.fabric.io/public' }
-    }
-
-    dependencies {
-        // These docs use an open ended version so that our plugin
-        // can be updated quickly in response to Android tooling updates
-
-        // We recommend changing it to the latest version from our changelog:
-        // https://docs.fabric.io/android/changelog.html#fabric-gradle-plugin
-        classpath 'io.fabric.tools:gradle:1.+'
-    }
-}
-
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
+apply plugin: 'com.google.firebase.firebase-perf'
 
-repositories {
-    maven { url 'https://maven.fabric.io/public' }
-}
+
 android {
     signingConfigs {
         netpower {
@@ -28,7 +12,7 @@ android {
             storePassword '123456'
         }
     }
-    dexOptions{
+    dexOptions {
 //        声明是否预 dex 库依赖项以加快您的增量构建速度。
 //        由于此功能可能减慢您的干净构建的速度，
 //        您可能需要为持续性集成服务器停用此功能。
@@ -36,8 +20,12 @@ android {
         //设置运行 dex-in-process 时要使用的最大线程数量
         maxProcessCount 8
         //设置 DEX 编译器的最大堆大小
-        //javaMaxHeapSize "2048m"
+       //javaMaxHeapSize "2048m"
+
+
     }
+
+
     compileSdkVersion 28
     buildToolsVersion "28.0.3"
     defaultConfig {
@@ -47,17 +35,16 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         debug {
-            debuggable true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 //            signingConfig signingConfigs.netpower
         }
         release {
             minifyEnabled false
-            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.netpower
         }
@@ -91,25 +78,43 @@ android {
         }
     }
     productFlavors.all {
-        flavor -> flavor.manifestPlaceholders = [
-                UMENG_CHANNEL_VALUE: name,
-                APPFLYER_DEV_KEY   : "DbiPJy5Z3rBxwa2pJPGUgh", //修改为当前应用的AppsFlyer开发ID
-                APPFLYER_CHANNEL   : name,]
+        flavor ->
+            flavor.manifestPlaceholders = [
+                    UMENG_CHANNEL_VALUE: name,
+                    APPFLYER_DEV_KEY   : "uWDevKNCFta9W2tPK3CMfP", //修改为当前应用的AppsFlyer开发ID
+                    APPFLYER_CHANNEL   : name,]
     }
 }
+
+
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:28.+'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
-    compile 'com.orhanobut:logger:2.1.1'
-    compile 'com.jakewharton:butterknife:8.5.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     compile('com.crashlytics.sdk.android:crashlytics:2.9.7@aar') {
         transitive = true;
     }
+    debugCompile project(path: ':appsflyer', configuration: 'debug')
+    releaseCompile project(path: ':appsflyer', configuration: 'release')
+//    compile project(':appsflyer')
+    compile 'com.android.support:appcompat-v7:28.+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.orhanobut:logger:2.1.1'
+    compile 'com.jakewharton:butterknife:8.5.1'
+    compile 'com.google.firebase:firebase-core:16.0.6'
+    compile 'com.google.firebase:firebase-perf:16.2.0'
+    compile 'com.crashlytics.sdk.android:crashlytics:2.9.6'
+    compile 'com.android.support:design:28.+'
+    compile 'com.android.support:support-vector-drawable:28.+'
+    compile 'com.android.support:support-v4:28.+'
+    compile 'com.android.support:recyclerview-v7:28.+'
+    testCompile 'junit:junit:4.12'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    compile 'com.daasuu:EasingInterpolator:1.0.0'
+
+
 }
+
+apply plugin: 'com.google.gms.google-services'

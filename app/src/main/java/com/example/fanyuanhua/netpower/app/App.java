@@ -1,8 +1,9 @@
-package com.example.fanyuanhua.netpower.base;
+package com.example.fanyuanhua.netpower.app;
 
 import android.app.Application;
 
 import com.crashlytics.android.Crashlytics;
+import com.example.appsflyer.AppsFlyer;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.BuildConfig;
 import com.orhanobut.logger.Logger;
@@ -24,17 +25,21 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         sharedApplication = this;
-        Logger.addLogAdapter(new AndroidLogAdapter(){
-            @Override public boolean isLoggable(int priority, String tag) {
+        Logger.addLogAdapter(new AndroidLogAdapter() {
+            @Override
+            public boolean isLoggable(int priority, String tag) {
                 return BuildConfig.DEBUG;
             }
         });  //logger
+//        Fabric.with(this, new Crashlytics());
 
-//        final Fabric fabric = new Fabric.Builder(this)
-//                .kits(new Crashlytics())
-//                .debuggable(true)
-//                .build();
-//        Fabric.with(fabric);
-        Fabric.with(this, new Crashlytics());
+        final Fabric fabric = new Fabric.Builder(this)
+                .kits(new Crashlytics())
+                .debuggable(true)           // Enables Crashlytics debugger
+                .build();
+        Fabric.with(fabric);
+//        AppsFlyer.init(this);
+
+
     }
 }

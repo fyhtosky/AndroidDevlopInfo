@@ -5,7 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
 
-import com.example.fanyuanhua.netpower.base.App;
+import com.example.fanyuanhua.netpower.app.App;
 
 /**
  * Created by fanyuanhua on 18/12/14.

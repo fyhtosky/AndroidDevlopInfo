@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "34986959007",
+    "firebase_url": "https://netpower-5b98b.firebaseio.com",
+    "project_id": "netpower-5b98b",
+    "storage_bucket": "netpower-5b98b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:34986959007:android:b5c4aca9a59791b3",
+        "android_client_info": {
+          "package_name": "com.example.fanyuanhua.netpower"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "34986959007-h2t2a951fli9cjnh5iqvbqkic8iosu3g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fanyuanhua.netpower",
+            "certificate_hash": "568db33a8d569bbcaadc8dfb943ce9c22396cb15"
+          }
+        },
+        {
+          "client_id": "34986959007-95haleohl2vdp5dt5h8n71o35vk5av16.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjSAXCacuk0KcuYhnz30kumqeX7v1wRr4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "34986959007-95haleohl2vdp5dt5h8n71o35vk5av16.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
