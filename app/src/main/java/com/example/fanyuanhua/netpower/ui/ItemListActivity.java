@@ -48,7 +48,7 @@ public class ItemListActivity extends AppCompatActivity {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(@NonNull View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
@@ -80,6 +80,7 @@ public class ItemListActivity extends AppCompatActivity {
             mValues = items;
         }
 
+        @NonNull
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
@@ -95,7 +96,7 @@ public class ItemListActivity extends AppCompatActivity {
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(@NonNull View v) {
                     if (mTwoPane) {
                         Bundle arguments = new Bundle();
                         arguments.putString(ItemDetailFragment.ARG_ITEM_ID, holder.mItem.id);
@@ -121,18 +122,22 @@ public class ItemListActivity extends AppCompatActivity {
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder {
+            @NonNull
             public final View mView;
+            @NonNull
             public final TextView mIdView;
+            @NonNull
             public final TextView mContentView;
             public DummyContent.DummyItem mItem;
 
-            public ViewHolder(View view) {
+            public ViewHolder(@NonNull View view) {
                 super(view);
                 mView = view;
                 mIdView = (TextView) view.findViewById(R.id.id);
                 mContentView = (TextView) view.findViewById(R.id.content);
             }
 
+            @NonNull
             @Override
             public String toString() {
                 return super.toString() + " '" + mContentView.getText() + "'";

@@ -9,6 +9,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -33,12 +34,14 @@ public class ShineButton extends PorterShapeImageView {
     int DEFAULT_WIDTH = 50;
     int DEFAULT_HEIGHT = 50;
 
+    @NonNull
     DisplayMetrics metrics = new DisplayMetrics();
 
 
     Activity activity;
     ShineView shineView;
     ValueAnimator shakeAnimator;
+    @NonNull
     ShineView.ShineParams shineParams = new ShineView.ShineParams();
 
     OnCheckedChangeListener listener;
@@ -46,20 +49,20 @@ public class ShineButton extends PorterShapeImageView {
     private int bottomHeight;
     private int realBottomHeight;
 
-    public ShineButton(Context context) {
+    public ShineButton(@NonNull Context context) {
         super(context);
         if (context instanceof Activity) {
             init((Activity) context);
         }
     }
 
-    public ShineButton(Context context, AttributeSet attrs) {
+    public ShineButton(@NonNull Context context, @NonNull AttributeSet attrs) {
         super(context, attrs);
         initButton(context, attrs);
     }
 
 
-    public ShineButton(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ShineButton(@NonNull Context context, @NonNull AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initButton(context, attrs);
     }
@@ -272,7 +275,7 @@ public class ShineButton extends PorterShapeImageView {
         invalidate();
         shakeAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
-            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+            public void onAnimationUpdate(@NonNull ValueAnimator valueAnimator) {
                 setScaleX((float) valueAnimator.getAnimatedValue());
                 setScaleY((float) valueAnimator.getAnimatedValue());
             }

@@ -1,6 +1,7 @@
 package com.example.fanyuanhua.netpower.ui;
 
 import android.annotation.SuppressLint;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -52,6 +53,7 @@ public class FullscreenActivity extends AppCompatActivity {
         }
     };
     private View mControlsView;
+    @Nullable
     private final Runnable mShowPart2Runnable = new Runnable() {
         @Override
         public void run() {

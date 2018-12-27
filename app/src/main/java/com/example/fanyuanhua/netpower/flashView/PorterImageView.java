@@ -10,6 +10,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.util.Log;
 
@@ -34,22 +35,22 @@ public abstract class PorterImageView extends android.support.v7.widget.AppCompa
 
     private boolean invalidated = true;
 
-    public PorterImageView(Context context) {
+    public PorterImageView(@NonNull Context context) {
         super(context);
         setup(context, null, 0);
     }
 
-    public PorterImageView(Context context, AttributeSet attrs) {
+    public PorterImageView(@NonNull Context context,@NonNull AttributeSet attrs) {
         super(context, attrs);
         setup(context, attrs, 0);
     }
 
-    public PorterImageView(Context context, AttributeSet attrs, int defStyle) {
+    public PorterImageView(@NonNull Context context, @NonNull AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         setup(context, attrs, defStyle);
     }
 
-    private void setup(Context context, AttributeSet attrs, int defStyle) {
+    private void setup(@NonNull Context context, @NonNull AttributeSet attrs, int defStyle) {
         if(getScaleType() == ScaleType.FIT_CENTER) {
             setScaleType(ScaleType.CENTER_CROP);
         }
@@ -101,7 +102,7 @@ public abstract class PorterImageView extends android.support.v7.widget.AppCompa
     protected abstract void paintMaskCanvas(Canvas maskCanvas, Paint maskPaint, int width, int height);
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(@NonNull Canvas canvas) {
         if (!isInEditMode()) {
             int saveCount = canvas.saveLayer(0.0f, 0.0f, getWidth(), getHeight(), null, Canvas.ALL_SAVE_FLAG);
             try {

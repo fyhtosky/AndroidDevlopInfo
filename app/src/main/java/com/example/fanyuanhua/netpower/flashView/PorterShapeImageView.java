@@ -7,6 +7,8 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 
 import com.example.fanyuanhua.netpower.R;
@@ -16,26 +18,28 @@ import com.example.fanyuanhua.netpower.R;
  */
 
 public class PorterShapeImageView extends PorterImageView {
+    @Nullable
     private Drawable shape;
     private Matrix matrix;
+    @Nullable
     private Matrix drawMatrix;
 
-    public PorterShapeImageView(Context context) {
+    public PorterShapeImageView(@NonNull Context context) {
         super(context);
         setup(context, null, 0);
     }
 
-    public PorterShapeImageView(Context context, AttributeSet attrs) {
+    public PorterShapeImageView(@NonNull Context context, @NonNull AttributeSet attrs) {
         super(context, attrs);
         setup(context, attrs, 0);
     }
 
-    public PorterShapeImageView(Context context, AttributeSet attrs, int defStyle) {
+    public PorterShapeImageView(@NonNull Context context, @NonNull AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         setup(context, attrs, defStyle);
     }
 
-    private void setup(Context context, AttributeSet attrs, int defStyle) {
+    private void setup(@NonNull Context context, @Nullable AttributeSet attrs, int defStyle) {
         if(attrs != null){
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.PorterImageView, defStyle, 0);
             shape = typedArray.getDrawable(R.styleable.PorterImageView_siShape);
@@ -50,7 +54,7 @@ public class PorterShapeImageView extends PorterImageView {
     }
 
     @Override
-    protected void paintMaskCanvas(Canvas maskCanvas, Paint maskPaint, int width, int height) {
+    protected void paintMaskCanvas(@NonNull Canvas maskCanvas, Paint maskPaint, int width, int height) {
         if(shape != null) {
             if (shape instanceof BitmapDrawable) {
                 configureBitmapBounds(getWidth(), getHeight());

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.appsflyer.AppsFlyerConversionListener;
@@ -23,7 +24,7 @@ public class AppsFlyer implements Application.ActivityLifecycleCallbacks {
     private static final String  AF_DEV_KEY = "uWDevKNCFta9W2tPK3CMfP";
 
 
-    public static void init(Application application) {
+    public static void init(@NonNull Application application) {
         boolean isDebug=(application.getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
         Log.i(TAG, "当前版本编译类型:"+isDebug);
         application.registerActivityLifecycleCallbacks(new AppsFlyer());

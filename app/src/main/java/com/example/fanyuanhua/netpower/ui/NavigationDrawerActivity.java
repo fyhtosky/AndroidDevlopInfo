@@ -2,6 +2,7 @@ package com.example.fanyuanhua.netpower.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -22,12 +23,16 @@ import butterknife.BindView;
 
 public class NavigationDrawerActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    @Nullable
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @Nullable
     @BindView(R.id.fab)
     FloatingActionButton fab;
+    @Nullable
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
+    @Nullable
     @BindView(R.id.nav_view)
     NavigationView navigationView;
     ImageView ivIcon;
@@ -42,7 +47,7 @@ public class NavigationDrawerActivity extends BaseActivity
         setSupportActionBar(toolbar);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(@NonNull View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
@@ -79,7 +84,7 @@ public class NavigationDrawerActivity extends BaseActivity
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.

@@ -3,6 +3,7 @@ package com.example.fanyuanhua.netpower.tool;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.fanyuanhua.netpower.app.App;
@@ -12,7 +13,7 @@ import com.example.fanyuanhua.netpower.app.App;
  */
 
 public class ChannelUnit {
-    public static final String UMENG_CHANNEL="UMENG_CHANNEL";
+    private static final String UMENG_CHANNEL="UMENG_CHANNEL";
     /**
      * 获取渠道名
      * @return 如果没有获取成功，那么返回值为空
@@ -41,8 +42,9 @@ public class ChannelUnit {
 
     /**
      * 获取版本号
-     * @return
+     * @return String
      */
+    @NonNull
     public static String getAppVersion(){
         PackageManager manager = App.getSharedApplication().getPackageManager();
         PackageInfo info = null;
@@ -51,9 +53,23 @@ public class ChannelUnit {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        final String appVersion = info.versionName; // 版本名
-        final int currentVersionCode = info.versionCode; // 版本号
 
-        return appVersion;
+        return info != null ? info.versionName : "1.0";
+    }
+
+    /**
+     * 获取版本号
+     * @return int
+     */
+    public static int getVersionCode(){
+        PackageManager manager = App.getSharedApplication().getPackageManager();
+        PackageInfo info = null;
+        try {
+            info = manager.getPackageInfo(App.getSharedApplication().getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return info != null ? info.versionCode : 1;
     }
 }

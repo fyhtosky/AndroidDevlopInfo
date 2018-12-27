@@ -3,6 +3,7 @@
 buildscript {
     repositories {
         jcenter()
+        mavenCentral()
         maven { url 'https://maven.google.com'}
         maven {
             url 'https://maven.fabric.io/public'
@@ -25,6 +26,7 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        mavenCentral()
         maven { url 'https://maven.google.com'}
         maven {
             url 'https://maven.fabric.io/public'

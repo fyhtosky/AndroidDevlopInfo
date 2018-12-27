@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.WindowManager;
@@ -36,6 +37,7 @@ public class ShineView extends View {
     private Paint paintSmall;
 
     int colorCount = 10;
+    @NonNull
     static int colorRandom[] = new int[10];
 
     //Customer property
@@ -54,9 +56,12 @@ public class ShineView extends View {
     boolean enableFlashing = false;
 
 
+    @NonNull
     RectF rectF = new RectF();
+    @NonNull
     RectF rectFSmall = new RectF();
 
+    @NonNull
     Random random = new Random();
     int centerAnimX;
     int centerAnimY;
@@ -74,7 +79,7 @@ public class ShineView extends View {
         super(context);
     }
 
-    public ShineView(Context context, final ShineButton shineButton, ShineParams shineParams) {
+    public ShineView(Context context, @NonNull final ShineButton shineButton, @NonNull ShineParams shineParams) {
         super(context);
 
 
@@ -109,7 +114,7 @@ public class ShineView extends View {
         clickAnimator.setInterpolator(new EasingInterpolator(Ease.QUART_OUT));
         clickAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
-            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+            public void onAnimationUpdate(@NonNull ValueAnimator valueAnimator) {
                 clickValue = (float) valueAnimator.getAnimatedValue();
                 invalidate();
             }
@@ -170,7 +175,7 @@ public class ShineView extends View {
     }
 
 
-    public void showAnimation(ShineButton shineButton) {
+    public void showAnimation(@NonNull ShineButton shineButton) {
         btnWidth = shineButton.getWidth();
         btnHeight = shineButton.getHeight();
         thirdLength = getThirdLength(btnHeight, btnWidth);
@@ -197,7 +202,7 @@ public class ShineView extends View {
         }
         shineAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
-            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+            public void onAnimationUpdate(@NonNull ValueAnimator valueAnimator) {
                 value = (float) valueAnimator.getAnimatedValue();
                 if (shineSize != 0 && shineSize > 0) {
                     paint.setStrokeWidth((shineSize) * (shineDistanceMultiple - value));
@@ -220,7 +225,7 @@ public class ShineView extends View {
 
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(@NonNull Canvas canvas) {
         super.onDraw(canvas);
         for (int i = 0; i < shineCount; i++) {
             if (allowRandomColor) {
@@ -250,7 +255,8 @@ public class ShineView extends View {
         }
     }
 
-    private Paint getConfigPaint(Paint paint) {
+    @NonNull
+    private Paint getConfigPaint(@NonNull Paint paint) {
         if (enableFlashing) {
             paint.setColor(colorRandom[random.nextInt(colorCount - 1)]);
         }
@@ -289,7 +295,7 @@ public class ShineView extends View {
         public int shineSize = 0;
     }
 
-    private void initShineParams(ShineParams shineParams, ShineButton shineButton) {
+    private void initShineParams(@NonNull ShineParams shineParams, @NonNull ShineButton shineButton) {
         shineCount = shineParams.shineCount;
         turnAngle = shineParams.shineTurnAngle;
         smallOffsetAngle = shineParams.smallShineOffsetAngle;
@@ -315,38 +321,26 @@ public class ShineView extends View {
      * @param activity
      * @return isFullScreen
      */
-    public static boolean isFullScreen(Activity activity) {
+    public static boolean isFullScreen(@NonNull Activity activity) {
         int flag = activity.getWindow().getAttributes().flags;
-        if ((flag & WindowManager.LayoutParams.FLAG_FULLSCREEN)
-                == WindowManager.LayoutParams.FLAG_FULLSCREEN) {
-            return true;
-        } else {
-            return false;
-        }
+        return (flag & WindowManager.LayoutParams.FLAG_FULLSCREEN)
+                == WindowManager.LayoutParams.FLAG_FULLSCREEN;
     }
 
     /**
      * @param activity
      * @return isTranslucentNavigation
      */
-    public static boolean isTranslucentNavigation(Activity activity) {
+    public static boolean isTranslucentNavigation(@NonNull Activity activity) {
         int flag = activity.getWindow().getAttributes().flags;
-        if ((flag & WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
-                == WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION) {
-            return true;
-        } else {
-            return false;
-        }
+        return (flag & WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
+                == WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION;
     }
 
-    private boolean isWindowsNotLimit(Activity activity) {
+    private boolean isWindowsNotLimit(@NonNull Activity activity) {
         int flag = activity.getWindow().getAttributes().flags;
-        if ((flag & WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-                == WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS) {
-            return true;
-        } else {
-            return false;
-        }
+        return (flag & WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+                == WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS;
     }
 
 }

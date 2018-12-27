@@ -3,7 +3,6 @@ package com.example.fanyuanhua.netpower.app;
 import android.app.Application;
 
 import com.crashlytics.android.Crashlytics;
-import com.example.appsflyer.AppsFlyer;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.BuildConfig;
 import com.orhanobut.logger.Logger;
@@ -38,7 +37,7 @@ public class App extends Application {
                 .debuggable(true)           // Enables Crashlytics debugger
                 .build();
         Fabric.with(fabric);
-//        AppsFlyer.init(this);
+
 
 
     }

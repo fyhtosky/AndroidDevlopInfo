@@ -14,6 +14,7 @@ public class BottomMeunActivity extends BaseActivity {
 
     private TextView mTextMessage;
 
+    @NonNull
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 

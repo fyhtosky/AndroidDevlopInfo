@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion 28
     buildToolsVersion "28.0.3"
-    publishNonDefault true //不再按默认只构建release版本
+//    publishNonDefault true //不再按默认只构建release版本
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 28
@@ -26,6 +26,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors{
+        admob {
+        }
+        facebook {
+        }
+
+    }
 }
 
 
@@ -45,4 +52,7 @@ dependencies {
     //AppsFlyer SDK
     compile 'com.appsflyer:af-android-sdk:4+@aar'
     compile 'com.android.installreferrer:installreferrer:1.0'
+
+    admobCompile 'com.google.firebase:firebase-ads:11.0.4'
+    facebookCompile 'com.facebook.android:facebook-android-sdk:[4,5)'
 }
