@@ -2,6 +2,8 @@ package com.example.fanyuanhua.netpower.base.mvp;
 
 import android.content.Context;
 
+import javax.inject.Inject;
+
 /**
  * Created by fanyuanhua on 18/12/27.
  * 绑定view 和Model

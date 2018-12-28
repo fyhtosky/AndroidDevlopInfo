@@ -1,5 +1,6 @@
 package com.example.fanyuanhua.netpower.base.qq.bean.model;
 
+import com.example.fanyuanhua.netpower.base.mvp.BaseView;
 import com.example.fanyuanhua.netpower.base.mvp.ResponeThrowable;
 import com.example.fanyuanhua.netpower.base.mvp.RxObserver;
 import com.example.fanyuanhua.netpower.base.qq.bean.GRCodeContract;
@@ -12,6 +13,9 @@ import io.reactivex.annotations.NonNull;
  */
 
 public class QRCodePresenter extends GRCodeContract.Presenter {
+
+
+
     @Override
     public void getGRCode() {
        mModel.getGRCode().subscribe(new RxObserver<GRCodeInfo>() {

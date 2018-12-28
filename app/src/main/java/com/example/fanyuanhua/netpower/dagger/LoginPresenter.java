@@ -1,28 +1,41 @@
 package com.example.fanyuanhua.netpower.dagger;
 
-import android.content.Context;
-import android.widget.Toast;
+import com.example.fanyuanhua.netpower.base.mvp.ResponeThrowable;
+import com.example.fanyuanhua.netpower.base.mvp.RxObserver;
+import com.example.fanyuanhua.netpower.base.qq.bean.GRCodeContract;
+import com.example.fanyuanhua.netpower.base.qq.bean.GRCodeInfo;
 
 import javax.inject.Inject;
+
+import io.reactivex.annotations.NonNull;
 
 /**
  * Created by fanyuanhua on 18/12/27.
  */
 
-public class LoginPresenter {
-    ICommonView iView;
+public class LoginPresenter extends GRCodeContract.Presenter {
 
     @Inject
-    public LoginPresenter(ICommonView iView){
+    CommonModel mModel;
 
-        this.iView = iView;
+    @Inject
+    public LoginPresenter(GRCodeContract.View mView) {
+        this.mView = mView;
+
     }
 
-    public void login(User user){
+    @Override
+    public void getGRCode() {
+        mModel.getGRCode().subscribe(new RxObserver<GRCodeInfo>() {
+            @Override
+            public void onSuccess(@NonNull GRCodeInfo grCodeInfo) {
+                mView.getGRCode(grCodeInfo);
+            }
+            @Override
+            protected void onError(@NonNull ResponeThrowable ex) {
+                mView.showErrorWithStatus(ex.message);
+            }
+        });
 
-        Context mContext = iView.getContext();
-        Toast.makeText(mContext,"login......",Toast.LENGTH_SHORT).show();
     }
-
-
 }

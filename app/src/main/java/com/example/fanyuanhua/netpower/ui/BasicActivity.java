@@ -11,7 +11,6 @@ import com.example.fanyuanhua.netpower.R;
 import com.example.fanyuanhua.netpower.base.BaseActivity;
 import com.example.fanyuanhua.netpower.dagger.ClassA;
 import com.example.fanyuanhua.netpower.dagger.DaggerAComponent;
-import com.example.fanyuanhua.netpower.dagger.DaggerCommonComponent;
 
 import javax.inject.Inject;
 

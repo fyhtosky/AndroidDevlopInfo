@@ -104,5 +104,26 @@ public class GRCodeInfo {
         public void setUrl(String url) {
             this.url = url;
         }
+
+        @Override
+        public String toString() {
+            return "QqGRCodeInfoBean{" +
+                    "androidKey='" + androidKey + '\'' +
+                    ", edition='" + edition + '\'' +
+                    ", iosKey='" + iosKey + '\'' +
+                    ", num=" + num +
+                    ", qq='" + qq + '\'' +
+                    ", uploadTime='" + uploadTime + '\'' +
+                    ", url='" + url + '\'' +
+                    '}';
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "GRCodeInfo{" +
+                "qqGRCodeInfo=" + qqGRCodeInfo +
+                ", state='" + state + '\'' +
+                '}';
     }
 }

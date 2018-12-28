@@ -55,7 +55,7 @@ public  abstract class BaseMvpActivity<M extends BaseModel,P extends BasePresent
 
 
 
-    private void onEvent() {
+    protected void onEvent() {
 
     }
 

@@ -1,5 +1,7 @@
 package com.example.fanyuanhua.netpower.dagger;
 
+import com.example.fanyuanhua.netpower.base.qq.bean.GRCodeContract;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -8,17 +10,20 @@ import dagger.Provides;
  */
 @Module
 public class CommonModule {
-    private ICommonView iView;
-    public CommonModule(ICommonView iView){
-        this.iView = iView;
-    }
+    private GRCodeContract.View mView;
 
+    public CommonModule(GRCodeContract.View mView){
+        this.mView = mView;
+
+    }
 
     @Provides
     @ActivityScope
-    public ICommonView provideIcommonView(){
-        return this.iView;
+    public GRCodeContract.View provideBaseView(){
+        return this.mView;
     }
+
+
 
 
 }
