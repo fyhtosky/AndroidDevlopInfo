@@ -1,4 +1,6 @@
-package com.example.fanyuanhua.netpower.base.mvp;
+package com.example.fanyuanhua.netpower.net;
+
+import com.example.fanyuanhua.netpower.base.mvp.ErrorObserver;
 
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;

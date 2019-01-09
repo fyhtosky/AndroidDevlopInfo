@@ -1,4 +1,4 @@
-package com.example.fanyuanhua.netpower.base.mvp;
+package com.example.fanyuanhua.netpower.net;
 
 import android.support.annotation.NonNull;
 

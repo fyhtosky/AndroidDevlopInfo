@@ -1,6 +1,6 @@
 package com.example.fanyuanhua.netpower.dagger;
 
-import com.example.fanyuanhua.netpower.ui.BasicActivity;
+import com.example.fanyuanhua.netpower.ui.test.BasicActivity;
 
 import dagger.Component;
 

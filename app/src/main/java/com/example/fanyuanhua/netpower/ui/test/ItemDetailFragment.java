@@ -1,4 +1,4 @@
-package com.example.fanyuanhua.netpower.ui;
+package com.example.fanyuanhua.netpower.ui.test;
 
 import android.app.Activity;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.fanyuanhua.netpower.R;
-import com.example.fanyuanhua.netpower.ui.dummy.DummyContent;
+import com.example.fanyuanhua.netpower.ui.test.dummy.DummyContent;
 
 /**
  * A fragment representing a single Item detail screen.

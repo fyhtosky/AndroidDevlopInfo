@@ -1,8 +1,7 @@
 package com.example.fanyuanhua.netpower.base.qq.bean.model;
 
-import com.example.fanyuanhua.netpower.base.mvp.BaseView;
-import com.example.fanyuanhua.netpower.base.mvp.ResponeThrowable;
-import com.example.fanyuanhua.netpower.base.mvp.RxObserver;
+import com.example.fanyuanhua.netpower.net.ResponeThrowable;
+import com.example.fanyuanhua.netpower.net.RxObserver;
 import com.example.fanyuanhua.netpower.base.qq.bean.GRCodeContract;
 import com.example.fanyuanhua.netpower.base.qq.bean.GRCodeInfo;
 

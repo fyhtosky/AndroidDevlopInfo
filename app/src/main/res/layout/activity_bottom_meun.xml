@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.fanyuanhua.netpower.ui.BottomMeunActivity">
+    tools:context="com.example.fanyuanhua.netpower.ui.test.BottomMeunActivity">
 
     <FrameLayout
         android:id="@+id/content"

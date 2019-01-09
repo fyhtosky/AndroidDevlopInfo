@@ -38,20 +38,15 @@ public  abstract class BaseMvpActivity<M extends BaseModel,P extends BasePresent
             //注解绑定
             unbinder = ButterKnife.bind(this);
             inject();//Dagger MVP架构初始化
-            bindMVP();
+//            bindMVP();
             onInitView(savedInstanceState);
             onEvent();
         }
     }
 
-    private void bindMVP() {
-        if(mPresenter!=null&&!mPresenter.isViewBind()&&getViewImp()!=null) {
-            mPresenter.mContext=this;
-            mPresenter.attachView(getViewImp());
-            mPresenter.attachModel(mPresenter.getmModel());
-        }
+//    protected   abstract void bindMVP() ;
 
-    }
+
 
 
 

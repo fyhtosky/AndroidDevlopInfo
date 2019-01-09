@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
-apply plugin: 'com.google.firebase.firebase-perf'
+
 
 
 android {
@@ -20,11 +20,11 @@ android {
         //设置运行 dex-in-process 时要使用的最大线程数量
         maxProcessCount 8
         //设置 DEX 编译器的最大堆大小
-       //javaMaxHeapSize "2048m"
+        //javaMaxHeapSize "2048m"
 
 
     }
-    lintOptions{
+    lintOptions {
         checkReleaseBuilds false
         abortOnError false
     }
@@ -39,11 +39,14 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
+        flavorDimensions "versionCode"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
     }
     buildTypes {
         debug {
+            ext.enableCrashlytics = false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 //            signingConfig signingConfigs.netpower
@@ -61,7 +64,9 @@ android {
         googlePlay {}
         tencent {}
         qihu360 {}
-        baidu {}
+        baidu {
+            applicationIdSuffix '.dev'
+        }
         huawei {}
         xiaomi {}
         oppo {}
@@ -71,22 +76,26 @@ android {
 
 
     }
-    //自定义打包时apk名称
+
+    // 自定义输出配置
     android.applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            def outputFile = output.outputFile
-            if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                //这里修改apk文件名
-                //release
-                def fileName = "netpower_${variant.productFlavors[0].name}_${defaultConfig.versionName}.apk"
-                output.outputFile = new File(outputFile.parent, fileName)
+        variant.outputs.all {
+            def formattedDate = new Date().format("yy_MM_dd", TimeZone.getTimeZone("UTC"))
+            if (variant.buildType.name == 'release') {
+                outputFileName = "NetPower_" + variant.productFlavors[0].name + "_${variant.versionName}.apk"
+            } else if (variant.buildType.name == 'debug') {
+                outputFileName = "NetPower_" + variant.productFlavors[0].name + "_${variant.buildType.name}" + "_${formattedDate}.apk"
             }
         }
     }
+
+
+
     productFlavors.all {
         flavor ->
             flavor.manifestPlaceholders = [
                     UMENG_CHANNEL_VALUE: name,
+                    FABRIC_API_KEY     : "704c2ed990ae3edea47fffbf0aa1785dede6ab39",
                     APPFLYER_DEV_KEY   : "uWDevKNCFta9W2tPK3CMfP", //修改为当前应用的AppsFlyer开发ID
                     APPFLYER_CHANNEL   : name,]
     }
@@ -95,59 +104,51 @@ android {
 
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'com.google.code.findbugs'
     })
-    compile('com.crashlytics.sdk.android:crashlytics:2.9.7@aar') {
+    implementation('com.crashlytics.sdk.android:crashlytics:2.9.7@aar') {
         transitive = true;
     }
-    //    debugCompile project(path: ':appsflyer', configuration: 'debug')
-    //    releaseCompile project(path: ':appsflyer', configuration: 'release')
-    //    compile project(':appsflyer')
-    compile 'com.android.support:appcompat-v7:28.+'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
-    compile 'com.jakewharton:butterknife:8.5.1'
-    compile 'com.google.firebase:firebase-core:16.0.6'
-    compile 'com.google.firebase:firebase-perf:16.2.0'
-    compile 'com.android.support:design:28.+'
-    compile 'com.android.support:support-vector-drawable:28.+'
-    compile 'com.android.support:support-v4:28.+'
-    compile 'com.android.support:recyclerview-v7:28.+'
-    testCompile 'junit:junit:4.12'
+    implementation 'com.android.support:appcompat-v7:28.+'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.jakewharton:butterknife:8.5.1'
+
+    implementation 'com.android.support:design:28.+'
+    implementation 'com.android.support:support-vector-drawable:28.+'
+    implementation 'com.android.support:support-v4:28.+'
+    implementation 'com.android.support:recyclerview-v7:28.+'
+    testImplementation 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
-    compile 'com.daasuu:EasingInterpolator:1.0.0'
-    compile project(':appsflyer')
-
+    implementation 'com.daasuu:EasingInterpolator:1.0.0'
     //dagger
-    annotationProcessor "com.google.dagger:dagger-compiler:2.11"
-    provided 'org.glassfish:javax.annotation:10.0-b28'
-    compile "com.google.dagger:dagger:2.11"
-    compile "com.google.dagger:dagger-android:2.11"
-    compile "com.google.dagger:dagger-android-support:2.11"
-    annotationProcessor "com.google.dagger:dagger-android-processor:2.11"
-
+    annotationProcessor "com.google.dagger:dagger-compiler:2.15"
+    compileOnly 'org.glassfish:javax.annotation:10.0-b28'
+    implementation 'com.google.dagger:dagger:2.15'
+    implementation 'com.google.dagger:dagger-android:2.15'
+    implementation 'com.google.dagger:dagger-android-support:2.15'
+    annotationProcessor "com.google.dagger:dagger-android-processor:2.15"
     //retrofit
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-    compile 'com.squareup.retrofit2:converter-scalars:2.3.0'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.8.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1'
     //Rxjava
-    compile 'io.reactivex.rxjava2:rxjava:2.1.3'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.3'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     //logger
-    compile 'com.orhanobut:logger:2.1.1'
+    implementation 'com.orhanobut:logger:2.1.1'
     //Gson
-    compile 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.google.code.gson:gson:2.8.2'
     //leakcanary
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.6.2'
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.2'
-
-
-
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.2'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.2'
+    implementation project(':appsflyer')
+    implementation 'com.android.support:multidex:1.0.3'
+    androidTestImplementation 'com.android.support:multidex:1.0.3'
+    androidTestImplementation 'com.android.support:multidex-instrumentation:1.0.3'
 }
-
-apply plugin: 'com.google.gms.google-services'

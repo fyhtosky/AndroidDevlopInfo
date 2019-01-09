@@ -1,4 +1,4 @@
-package com.example.fanyuanhua.netpower.ui;
+package com.example.fanyuanhua.netpower.ui.test;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.example.fanyuanhua.netpower.R;
 
-import com.example.fanyuanhua.netpower.ui.dummy.DummyContent;
+import com.example.fanyuanhua.netpower.ui.test.dummy.DummyContent;
 
 import java.util.List;
 

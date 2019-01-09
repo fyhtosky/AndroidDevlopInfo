@@ -1,4 +1,4 @@
-package com.example.fanyuanhua.netpower.ui;
+package com.example.fanyuanhua.netpower.ui.test;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;

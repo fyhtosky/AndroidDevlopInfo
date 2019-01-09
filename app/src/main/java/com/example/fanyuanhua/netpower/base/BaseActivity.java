@@ -5,10 +5,6 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.perf.FirebasePerformance;
-import com.google.firebase.perf.metrics.Trace;
-
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -18,15 +14,10 @@ import butterknife.Unbinder;
 
 public abstract class BaseActivity extends AppCompatActivity {
     private Unbinder unbinder;
-    protected FirebaseAnalytics mFirebaseAnalytics;
-    private Trace myTrace;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mFirebaseAnalytics=FirebaseAnalytics.getInstance(this);
-        myTrace = FirebasePerformance.getInstance().newTrace("test_trace");
-        myTrace.start();
         if (getLayoutId() != 0) {
             setContentView(getLayoutId());
             unbinder = ButterKnife.bind(this);
@@ -67,6 +58,5 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
-        myTrace.stop();
     }
 }

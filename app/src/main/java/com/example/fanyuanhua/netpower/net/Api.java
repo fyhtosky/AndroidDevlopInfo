@@ -1,4 +1,4 @@
-package com.example.fanyuanhua.netpower.base;
+package com.example.fanyuanhua.netpower.net;
 
 
 import com.example.fanyuanhua.netpower.base.qq.bean.GRCodeInfo;

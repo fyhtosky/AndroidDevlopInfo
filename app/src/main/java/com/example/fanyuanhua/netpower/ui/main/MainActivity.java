@@ -1,4 +1,4 @@
-package com.example.fanyuanhua.netpower.ui;
+package com.example.fanyuanhua.netpower.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,7 @@ import com.example.fanyuanhua.netpower.dagger.CommonModule;
 import com.example.fanyuanhua.netpower.dagger.DaggerCommonComponent;
 import com.example.fanyuanhua.netpower.dagger.LoginPresenter;
 import com.example.fanyuanhua.netpower.tool.ChannelUnit;
+import com.example.fanyuanhua.netpower.ui.test.BasicActivity;
 import com.orhanobut.logger.Logger;
 
 import javax.inject.Inject;
@@ -39,6 +40,8 @@ public class MainActivity extends BaseMvpActivity<CommonModel,LoginPresenter> im
     protected BaseView getViewImp() {
         return null;
     }
+
+
 
     @Override
     protected void onInitView(@Nullable Bundle bundle) {

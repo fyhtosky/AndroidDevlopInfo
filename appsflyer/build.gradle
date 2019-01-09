@@ -9,7 +9,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-
+        flavorDimensions "versionCode"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [
                 APPFLYER_DEV_KEY:"\${APPFLYER_DEV_KEY}",
@@ -26,13 +26,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    productFlavors{
-        admob {
-        }
-        facebook {
-        }
 
-    }
 }
 
 
@@ -42,17 +36,17 @@ repositories {
     maven { url "https://maven.google.com" }
 }
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:28.+'
-    testCompile 'junit:junit:4.12'
+    implementation 'com.android.support:appcompat-v7:28.+'
+    testImplementation 'junit:junit:4.12'
 
     //AppsFlyer SDK
-    compile 'com.appsflyer:af-android-sdk:4+@aar'
-    compile 'com.android.installreferrer:installreferrer:1.0'
+    implementation 'com.appsflyer:af-android-sdk:4+@aar'
+    implementation 'com.android.installreferrer:installreferrer:1.0'
 
-    admobCompile 'com.google.firebase:firebase-ads:11.0.4'
-    facebookCompile 'com.facebook.android:facebook-android-sdk:[4,5)'
+    implementation 'com.google.firebase:firebase-ads:11.0.4'
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 }

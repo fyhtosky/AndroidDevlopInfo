@@ -1,4 +1,4 @@
-package com.example.fanyuanhua.netpower.base;
+package com.example.fanyuanhua.netpower.net;
 
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;

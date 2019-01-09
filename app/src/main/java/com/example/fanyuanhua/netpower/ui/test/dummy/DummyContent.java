@@ -1,4 +1,4 @@
-package com.example.fanyuanhua.netpower.ui.dummy;
+package com.example.fanyuanhua.netpower.ui.test.dummy;
 
 import android.support.annotation.NonNull;
 
