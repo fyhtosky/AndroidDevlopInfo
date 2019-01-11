@@ -25,8 +25,10 @@ public class MindMapActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mind_map);
         ButterKnife.bind(this);
-       tvSpeed.setText("服务器的地址："+BuildConfig.hostUrl);
         Log.d(TAG,"gradlew配置服务器地址");
+        
+        tvSpeed.setText("服务器的地址："+BuildConfig.hostUrl);
+
 
 
     }
