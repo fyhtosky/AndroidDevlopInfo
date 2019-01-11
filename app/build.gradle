@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 
 
-
 android {
     signingConfigs {
         netpower {
@@ -45,27 +44,42 @@ android {
         multiDexEnabled true
     }
     buildTypes {
+        //1.在gradlew 配置服务器地址
         debug {
+            buildConfigField "String", "hostUrl"," \"https://mindcloud.camoryapps.com/test\"" //服务器地址
             ext.enableCrashlytics = false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 //            signingConfig signingConfigs.netpower
         }
         release {
+            buildConfigField "String", "hostUrl", "\"https://mindcloud.camoryapps.com/OssService\"" //服务器地址
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.netpower
         }
 
+        develop{
+            //自定义包名
+            applicationIdSuffix ".develop"
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
 
     }
+    sourceSets{
+
+    }
+
     //多渠道命令打包所有平台的
     productFlavors {
+        demo {}
         googlePlay {}
         tencent {}
         qihu360 {}
         baidu {
             applicationIdSuffix '.dev'
+
         }
         huawei {}
         xiaomi {}
@@ -75,6 +89,14 @@ android {
         meizu {}
 
 
+    }
+    //过滤variant
+    variantFilter{variant->
+        def names = variant.flavors*.name
+        if ( names.contains("demo")) {
+            // Gradle ignores any variants that satisfy the conditions above.
+            setIgnore(true)
+        }
     }
 
     // 自定义输出配置
@@ -109,9 +131,9 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'com.google.code.findbugs'
     })
-    implementation('com.crashlytics.sdk.android:crashlytics:2.9.7@aar') {
-        transitive = true;
-    }
+//    implementation('com.crashlytics.sdk.android:crashlytics:2.9.7@aar') {
+//        transitive = true;
+//    }
 
     implementation 'com.android.support:appcompat-v7:28.+'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -147,7 +169,7 @@ dependencies {
     //leakcanary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.2'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.2'
-    implementation project(':appsflyer')
+//    implementation project(':appsflyer')
     implementation 'com.android.support:multidex:1.0.3'
     androidTestImplementation 'com.android.support:multidex:1.0.3'
     androidTestImplementation 'com.android.support:multidex-instrumentation:1.0.3'

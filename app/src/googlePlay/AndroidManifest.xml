@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.fanyuanhua.netpower">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -10,7 +11,8 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"
+        tools:node="remove"/>
     <application
         android:name=".app.App"
         android:allowBackup="true"
@@ -81,7 +83,7 @@
             android:name=".ui.test.TableActivity"
             android:label="@string/title_activity_table"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ui.main.MindMapActivity">
+        <activity android:name="MindMapActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
