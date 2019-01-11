@@ -2,6 +2,7 @@ package com.example.fanyuanhua.netpower.ui.main;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -13,7 +14,7 @@ import butterknife.ButterKnife;
 
 public class MindMapActivity extends AppCompatActivity {
 
-
+   final String TAG="MindMap";
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
     @BindView(R.id.tv_speed)
@@ -25,6 +26,7 @@ public class MindMapActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mind_map);
         ButterKnife.bind(this);
        tvSpeed.setText("服务器的地址："+BuildConfig.hostUrl);
+        Log.d(TAG,"gradlew配置服务器地址");
 
 
     }
