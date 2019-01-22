@@ -25,10 +25,10 @@ public interface NodeViewType {
     //lineType
      int ZHI_XIAN  = 0;
      int ZHE_XIAN  = 1;
-     int QU_XIAN  = 2;
+     int QU_XIAN   = 2;
 
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({TOPTOBOTTOM, LEFTTORIGHT, INTOOUT})
+    @IntDef({ZHI_XIAN, ZHE_XIAN, QU_XIAN})
     @interface NodeLinetMode {}
 
 

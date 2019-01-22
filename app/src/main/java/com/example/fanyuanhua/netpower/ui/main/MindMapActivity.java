@@ -2,11 +2,9 @@ package com.example.fanyuanhua.netpower.ui.main;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.fanyuanhua.netpower.BuildConfig;
 import com.example.fanyuanhua.netpower.R;
 
 import butterknife.BindView;
@@ -23,12 +21,13 @@ public class MindMapActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        Debug.startMethodTracing("sample");
         setContentView(R.layout.activity_mind_map);
         ButterKnife.bind(this);
-        Log.d(TAG,"gradlew配置服务器地址");
-        
-        tvSpeed.setText("服务器的地址："+BuildConfig.hostUrl);
-
+//        Log.d(TAG,"gradlew配置服务器地址");
+//        Thread.dumpStack();
+//        tvSpeed.setText("服务器的地址："+BuildConfig.hostUrl);
+//        Debug.stopMethodTracing();
 
 
     }

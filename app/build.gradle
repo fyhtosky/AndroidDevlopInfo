@@ -1,14 +1,33 @@
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 
+task dokeyStore<<{
+    def keystorePropertiesFile=rootProject.file("keystore.properties")
+    def keystoreProperties = new Properties()
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+    def keyAlias =keystoreProperties['keyAlias']
+    def keyPassword= keystoreProperties['keyPassword']
+    def storeFile= file(keystoreProperties['storeFile'])
+    def storePassword= keystoreProperties['storePassword']
+    println 'Hello, Gradle!==>'+keyAlias+',==>'+keyPassword+',==>'+storeFile+',==>'+storePassword
+}
+def keystorePropertiesFile=rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
     signingConfigs {
         netpower {
-            keyAlias 'key0'
-            keyPassword '123456'
-            storeFile file('../netpower.jks')
-            storePassword '123456'
+//            keyAlias 'key0'
+//            keyPassword '123456'
+//            storeFile file('../netpower.jks')
+//            storePassword '123456'
+
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+
         }
     }
     dexOptions {
