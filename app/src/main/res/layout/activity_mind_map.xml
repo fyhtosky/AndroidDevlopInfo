@@ -3,22 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="2dp"
     tools:context="com.example.fanyuanhua.netpower.ui.main.MindMapActivity">
 
-    <ProgressBar
-        android:layout_centerInParent="true"
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="?android:attr/progressBarStyleLargeInverse"/>
-    <TextView
-        android:layout_below="@+id/progress_bar"
-        android:id="@+id/tv_speed"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="已下载80%"/>
-
+  <!--<android.support.design.widget.TabLayout-->
+      <!--android:id="@+id/tabLayout"-->
+      <!--android:layout_width="match_parent"-->
+      <!--android:layout_height="50dp"-->
+      <!--app:tabSelectedTextColor="@color/colorAccent"-->
+      <!--app:tabIndicatorHeight="2dp"-->
+      <!--app:tabMode="scrollable"/>-->
+    <!--<android.support.v4.view.ViewPager-->
+        <!--android:layout_margin="10dp"-->
+        <!--android:layout_below="@+id/tabLayout"-->
+        <!--android:id="@+id/vp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"/>-->
+<com.example.fanyuanhua.netpower.view.CanvasFive
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
 
 </RelativeLayout>

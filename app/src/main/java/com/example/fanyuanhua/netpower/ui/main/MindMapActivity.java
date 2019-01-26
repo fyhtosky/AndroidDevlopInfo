@@ -1,34 +1,55 @@
 package com.example.fanyuanhua.netpower.ui.main;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 
 import com.example.fanyuanhua.netpower.R;
+import com.example.fanyuanhua.netpower.adapter.MyPagerAdapter;
+import com.example.fanyuanhua.netpower.base.BaseActivity;
+import com.example.fanyuanhua.netpower.fragment.DrawPageFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
-public class MindMapActivity extends AppCompatActivity {
+public class MindMapActivity extends BaseActivity {
 
-   final String TAG="MindMap";
-    @BindView(R.id.progress_bar)
-    ProgressBar progressBar;
-    @BindView(R.id.tv_speed)
-    TextView tvSpeed;
+    final String TAG = "MindMap";
+//    @BindView(R.id.tabLayout)
+//    TabLayout tabLayout;
+//    @BindView(R.id.vp)
+//    ViewPager vp;
+
+
+
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        Debug.startMethodTracing("sample");
-        setContentView(R.layout.activity_mind_map);
-        ButterKnife.bind(this);
-//        Log.d(TAG,"gradlew配置服务器地址");
-//        Thread.dumpStack();
-//        tvSpeed.setText("服务器的地址："+BuildConfig.hostUrl);
-//        Debug.stopMethodTracing();
+    protected int getLayoutId() {
+        return R.layout.activity_mind_map;
+    }
 
-
+    @Override
+    protected void onInitView(@Nullable Bundle bundle) {
+        List<String>titleList=new ArrayList<>();
+        titleList.add("drawColor");
+        titleList.add("drawCircle");
+        titleList.add("drawRect");
+        titleList.add("drawArc");
+        titleList.add("drawPath");
+        titleList.add("直方图");
+        titleList.add("饼状图");
+        List<Fragment>fragmentList=new ArrayList<>();
+        for (int i=0;i<titleList.size();i++){
+            fragmentList.add(DrawPageFragment.newInstance(R.layout.activity_main));
+        }
+        MyPagerAdapter pagerAdapter=new MyPagerAdapter(getSupportFragmentManager(),titleList,fragmentList);
+//        vp.setAdapter(pagerAdapter);
+//        vp.setOffscreenPageLimit(fragmentList.size());
+//        tabLayout.setupWithViewPager(vp);
     }
 }
