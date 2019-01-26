@@ -6,9 +6,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
-import android.os.Build;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 public class CanvasFive extends View {
@@ -29,7 +29,8 @@ public class CanvasFive extends View {
     }
 
     private void initViews() {
-        mPaint.setStrokeWidth(20);
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth(10);
         mPaint.setAntiAlias(true);
         path.reset();
     }
@@ -44,8 +45,9 @@ public class CanvasFive extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        drawTranslate(canvas);
-//        mPaint.setStyle(Paint.Style.STROKE);
+//        drawTranslate(canvas);
+        drawScale(canvas);
+//
 //        path.lineTo(100, 100);
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //            path.arcTo(100, 100, 300, 300, -90, 90, true); // 强制移动到弧形起点（无痕迹）
@@ -71,6 +73,19 @@ public class CanvasFive extends View {
 
     }
 
+    private void drawScale(Canvas canvas) {
+        // 将坐标系原点移动到画布正中心
+        canvas.translate(mWidth / 2, mHeight / 2);
+
+        RectF rect = new RectF(-400,-400,400,400);   // 矩形区域
+
+        for (int i=0; i<=20; i++)
+        {
+            canvas.scale(0.9f,0.9f);
+            canvas.drawRect(rect,mPaint);
+        }
+    }
+
     private void drawTranslate(Canvas canvas) {
         /**
          * translate 位移
@@ -89,15 +104,17 @@ public class CanvasFive extends View {
         // 将坐标系原点移动到画布正中心
         canvas.translate(mWidth / 2, mHeight / 2);
 
-        RectF rect = new RectF(0,-400,400,0);   // 矩形区域
+        RectF rect = new RectF(0,-400,200,0);   // 矩形区域
 
         mPaint.setColor(Color.BLACK);           // 绘制黑色矩形
         canvas.drawRect(rect,mPaint);
 
 
-        canvas.scale(-0.5f,-0.5f);          // 画布缩放
-
+//        canvas.scale(-0.5f,-0.5f);//-值翻转
+//        canvas.scale(0.5f,0.5f);      // 画布缩放
+        canvas.scale(-0.5f,-0.1f);
         mPaint.setColor(Color.BLUE);            // 绘制蓝色矩形
+        Log.i("CanvasFive","rect.left"+rect.left+";rect.right"+rect.right+";rect.top"+rect.top+";rect.bottom"+rect.bottom);
         canvas.drawRect(rect,mPaint);
     }
 }
