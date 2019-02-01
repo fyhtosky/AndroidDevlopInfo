@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 apply plugin: 'io.fabric'
 
 task dokeyStore<<{
@@ -192,4 +193,8 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     androidTestImplementation 'com.android.support:multidex:1.0.3'
     androidTestImplementation 'com.android.support:multidex-instrumentation:1.0.3'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }

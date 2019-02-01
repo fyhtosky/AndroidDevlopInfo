@@ -5,7 +5,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Picture;
 import android.graphics.RectF;
+import android.os.Build;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -15,6 +17,7 @@ public class CanvasFive extends View {
     private Paint mPaint = new Paint();
     private Path path=new Path();
     private int mWidth,mHeight;
+    private Picture mPicture = new Picture();
     public CanvasFive(Context context) {
         this(context,null);
     }
@@ -33,6 +36,7 @@ public class CanvasFive extends View {
         mPaint.setStrokeWidth(10);
         mPaint.setAntiAlias(true);
         path.reset();
+        drawSkew();
     }
 
     @Override
@@ -46,7 +50,11 @@ public class CanvasFive extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 //        drawTranslate(canvas);
-        drawScale(canvas);
+//        drawScale(canvas);
+//        drawRotate(canvas);
+        canvas.drawPicture(mPicture);
+
+//        drawSkew(canvas);
 //
 //        path.lineTo(100, 100);
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -73,6 +81,61 @@ public class CanvasFive extends View {
 
     }
 
+    private void drawSkew(Canvas canvas) {
+
+     // 将坐标系原点移动到画布正中心
+        canvas.translate(mWidth / 2, mHeight / 2);
+
+        RectF rect = new RectF(0,0,200,200);   // 矩形区域
+
+        mPaint.setColor(Color.BLACK);           // 绘制黑色矩形
+        canvas.drawRect(rect,mPaint);
+
+        canvas.skew(1,0);                       // 水平错切 <- 45度
+
+        mPaint.setColor(Color.BLUE);            // 绘制蓝色矩形
+        canvas.drawRect(rect,mPaint);
+    }
+
+    private void drawSkew() {
+      // 开始录制 (接收返回值Canvas)
+        Canvas canvas = mPicture.beginRecording(500, 500);
+        // 将坐标系原点移动到画布正中心
+        canvas.translate(mWidth / 2, mHeight / 2);
+
+        RectF rect = new RectF(0,0,200,200);   // 矩形区域
+
+        mPaint.setColor(Color.BLACK);           // 绘制黑色矩形
+        canvas.drawRect(rect,mPaint);
+
+        canvas.skew(1,0);                       // 水平错切 <- 45度
+
+        mPaint.setColor(Color.BLUE);            // 绘制蓝色矩形
+        canvas.drawRect(rect,mPaint);
+        mPicture.endRecording();
+    }
+
+    /**
+     * 旋转
+     * @param canvas
+     */
+    private void drawRotate(Canvas canvas) {
+        // 将坐标系原点移动到画布正中心
+        canvas.translate(mWidth / 2, mHeight / 2);
+
+        canvas.drawCircle(0,0,400,mPaint);          // 绘制两个圆形
+        canvas.drawCircle(0,0,380,mPaint);
+
+        for (int i=0; i<=360; i+=10){               // 绘制圆形之间的连接线
+            canvas.drawLine(0,380,0,400,mPaint);
+            canvas.rotate(10);
+        }
+    }
+
+    /**
+     * 缩放
+     * @param canvas
+     */
     private void drawScale(Canvas canvas) {
         // 将坐标系原点移动到画布正中心
         canvas.translate(mWidth / 2, mHeight / 2);
@@ -86,6 +149,10 @@ public class CanvasFive extends View {
         }
     }
 
+    /**
+     * 平移
+     * @param canvas
+     */
     private void drawTranslate(Canvas canvas) {
         /**
          * translate 位移
