@@ -6,6 +6,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 
+import com.daquexian.flexiblerichtextview.FlexibleRichTextView;
 import com.example.fanyuanhua.netpower.R;
 import com.example.fanyuanhua.netpower.adapter.MyPagerAdapter;
 import com.example.fanyuanhua.netpower.base.BaseActivity;
@@ -23,6 +24,7 @@ public class MindMapActivity extends BaseActivity {
 //    TabLayout tabLayout;
 //    @BindView(R.id.vp)
 //    ViewPager vp;
+
 
 
 
@@ -51,5 +53,7 @@ public class MindMapActivity extends BaseActivity {
 //        vp.setAdapter(pagerAdapter);
 //        vp.setOffscreenPageLimit(fragmentList.size());
 //        tabLayout.setupWithViewPager(vp);
+
+
     }
 }

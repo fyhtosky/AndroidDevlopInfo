@@ -2,17 +2,17 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'io.fabric'
 
-task dokeyStore<<{
-    def keystorePropertiesFile=rootProject.file("keystore.properties")
+task dokeyStore << {
+    def keystorePropertiesFile = rootProject.file("keystore.properties")
     def keystoreProperties = new Properties()
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-    def keyAlias =keystoreProperties['keyAlias']
-    def keyPassword= keystoreProperties['keyPassword']
-    def storeFile= file(keystoreProperties['storeFile'])
-    def storePassword= keystoreProperties['storePassword']
-    println 'Hello, Gradle!==>'+keyAlias+',==>'+keyPassword+',==>'+storeFile+',==>'+storePassword
+    def keyAlias = keystoreProperties['keyAlias']
+    def keyPassword = keystoreProperties['keyPassword']
+    def storeFile = file(keystoreProperties['storeFile'])
+    def storePassword = keystoreProperties['storePassword']
+    println 'Hello, Gradle!==>' + keyAlias + ',==>' + keyPassword + ',==>' + storeFile + ',==>' + storePassword
 }
-def keystorePropertiesFile=rootProject.file("keystore.properties")
+def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
@@ -66,20 +66,22 @@ android {
     buildTypes {
         //1.在gradlew 配置服务器地址
         debug {
-            buildConfigField "String", "hostUrl"," \"https://mindcloud.camoryapps.com/test\"" //服务器地址
+            buildConfigField "String", "hostUrl", " \"https://mindcloud.camoryapps.com/test\""
+            //服务器地址
             ext.enableCrashlytics = false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 //            signingConfig signingConfigs.netpower
         }
         release {
-            buildConfigField "String", "hostUrl", "\"https://mindcloud.camoryapps.com/OssService\"" //服务器地址
+            buildConfigField "String", "hostUrl", "\"https://mindcloud.camoryapps.com/OssService\""
+            //服务器地址
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.netpower
         }
 
-        develop{
+        develop {
             //自定义包名
             applicationIdSuffix ".develop"
             minifyEnabled false
@@ -87,7 +89,7 @@ android {
         }
 
     }
-    sourceSets{
+    sourceSets {
 
     }
 
@@ -111,9 +113,9 @@ android {
 
     }
     //过滤variant
-    variantFilter{variant->
+    variantFilter { variant ->
         def names = variant.flavors*.name
-        if ( names.contains("demo")) {
+        if (names.contains("demo")) {
             // Gradle ignores any variants that satisfy the conditions above.
             setIgnore(true)
         }
@@ -194,6 +196,8 @@ dependencies {
     androidTestImplementation 'com.android.support:multidex:1.0.3'
     androidTestImplementation 'com.android.support:multidex-instrumentation:1.0.3'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.github.daquexian:FlexibleRichTextView:0.8.2'
+
 }
 repositories {
     mavenCentral()

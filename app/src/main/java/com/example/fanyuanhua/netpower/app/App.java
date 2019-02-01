@@ -8,6 +8,8 @@ import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.BuildConfig;
 import com.orhanobut.logger.Logger;
 
+import org.scilab.forge.jlatexmath.core.AjLatexMath;
+
 /**
  * Created by fanyuanhua on 18/12/14.
  */
@@ -28,6 +30,7 @@ public class App extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        AjLatexMath.init(this);
         sharedApplication = this;
         Logger.addLogAdapter(new AndroidLogAdapter() {
             @Override
