@@ -1,5 +1,7 @@
 package com.example.fanyuanhua.netpower.ui.main;
 
+import android.content.ComponentName;
+import android.content.pm.PackageManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +10,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.fanyuanhua.netpower.BuildConfig;
 import com.example.fanyuanhua.netpower.R;
 import com.example.fanyuanhua.netpower.adapter.DragAdapter;
 import com.example.fanyuanhua.netpower.adapter.drag.DragItemCallBack;
@@ -24,6 +27,7 @@ public class DragItemActivity extends AppCompatActivity implements RecycleCallBa
     private DragAdapter mAdapter;
     private ArrayList<String> mList;
     private ItemTouchHelper mItemTouchHelper;
+    private PackageManager packageManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +43,7 @@ public class DragItemActivity extends AppCompatActivity implements RecycleCallBa
         mItemTouchHelper = new ItemTouchHelper(new DragItemCallBack(this));
         mItemTouchHelper.attachToRecyclerView(mRecyclerView);
         mRecyclerView.setAdapter(mAdapter);
+
     }
 
     @Override
@@ -74,4 +79,26 @@ public class DragItemActivity extends AppCompatActivity implements RecycleCallBa
             mAdapter.show.put(to, to);
         }
     }
+
+
+    private void setRoundIcon() {
+        PackageManager packageManager = getPackageManager();
+        packageManager.setComponentEnabledSetting(new ComponentName(this, getPackageName() +
+                ".ui.main.DragItemActivity"), PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager
+                .DONT_KILL_APP);
+        packageManager.setComponentEnabledSetting(new ComponentName(this, getPackageName() +
+                ".RoundActivity"), PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager
+                .DONT_KILL_APP);
+    }
+    private void setPrimitiveIcon() {
+        PackageManager packageManager = getPackageManager();
+        packageManager.setComponentEnabledSetting(new ComponentName(this, getPackageName() +
+                        ".RoundActivity"), PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                PackageManager.DONT_KILL_APP);
+        packageManager.setComponentEnabledSetting(new ComponentName(this, getPackageName() +
+                ".ui.main.DragItemActivity"), PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager
+                .DONT_KILL_APP);
+    }
+
+
 }

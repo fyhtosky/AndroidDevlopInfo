@@ -1,7 +1,6 @@
 package com.example.fanyuanhua.netpower.adapter;
 
 import android.graphics.Color;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
