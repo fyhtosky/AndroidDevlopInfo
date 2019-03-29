@@ -153,14 +153,12 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'com.google.code.findbugs'
     })
-//    implementation('com.crashlytics.sdk.android:crashlytics:2.9.7@aar') {
-//        transitive = true;
-//    }
-
+    //    implementation('com.crashlytics.sdk.android:crashlytics:2.9.7@aar') {
+    //        transitive = true;
+    //    }
     implementation 'com.android.support:appcompat-v7:28.+'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.jakewharton:butterknife:8.5.1'
-
     implementation 'com.android.support:design:28.+'
     implementation 'com.android.support:support-vector-drawable:28.+'
     implementation 'com.android.support:support-v4:28.+'
@@ -191,13 +189,14 @@ dependencies {
     //leakcanary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.2'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.2'
-//    implementation project(':appsflyer')
+    //    implementation project(':appsflyer')
     implementation 'com.android.support:multidex:1.0.3'
     androidTestImplementation 'com.android.support:multidex:1.0.3'
     androidTestImplementation 'com.android.support:multidex-instrumentation:1.0.3'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.github.daquexian:FlexibleRichTextView:0.8.2'
-
+    implementation files('libs/Msc.jar')
+    implementation files('libs/Sunflower.jar')
 }
 repositories {
     mavenCentral()
